@@ -143,19 +143,23 @@ class TestMain:
             with pytest.raises(SystemExit) as exc_info:
                 main()
 
-            assert exc_info.value.code == 1
+            # argparse exits with code 2 for missing required arguments
+            assert exc_info.value.code == 2
 
     def test_main_help_output(self, capsys):
-        """Test that help message is displayed with no args"""
-        with patch.object(sys, 'argv', ['enrich-graph']):
-            with pytest.raises(SystemExit):
+        """Test that help message is displayed with --help flag"""
+        with patch.object(sys, 'argv', ['enrich-graph', '--help']):
+            with pytest.raises(SystemExit) as exc_info:
                 main()
 
+            # argparse exits with code 0 for --help
+            assert exc_info.value.code == 0
+
         captured = capsys.readouterr()
+        # argparse writes help to stdout when --help is used
         output = captured.out
 
-        assert "Code Graph Enricher" in output
-        assert "Usage:" in output
+        assert "Performs iterative enrichment" in output
         assert "graph_json_path" in output
         assert "root_code_path" in output
         assert "--iterations" in output
@@ -318,15 +322,18 @@ class TestMain:
         with open(graph_file, 'w') as f:
             json.dump(sample_graph, f)
 
-        # Should raise ValueError or similar when trying to convert "invalid" to int
+        # argparse raises SystemExit (code 2) for invalid argument values
         with patch.object(sys, 'argv', [
             'enrich-graph',
             str(graph_file),
             str(temp_source_dir),
             '--iterations', 'invalid'
         ]):
-            with pytest.raises(ValueError):
+            with pytest.raises(SystemExit) as exc_info:
                 main()
+
+            # argparse exits with code 2 for invalid argument values
+            assert exc_info.value.code == 2
 
     def test_main_relative_paths(self, temp_output_dir, sample_graph, temp_source_dir):
         """Test CLI with relative paths (converted to absolute)"""

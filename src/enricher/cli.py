@@ -4,6 +4,7 @@ Code Graph Enricher - CLI Tool
 Performs iterative enrichment of code graphs with structural, semantic, and domain knowledge
 """
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -56,49 +57,74 @@ def print_statistics(stats: Dict[str, Any]):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Code Graph Enricher")
-        print("="*60)
-        print("\nUsage: enrich-graph <graph_json_path> [root_code_path] [options]")
-        print("\nArguments:")
-        print("  graph_json_path    Path to code-graph.json file")
-        print("  root_code_path     Root directory of source code (optional)")
-        print("\nOptions:")
-        print("  --iterations N     Maximum iterations (default: 2)")
-        print("  --no-convergence   Disable early stopping on convergence")
-        print("\nExample:")
-        print("  enrich-graph ./code-graph.json ./src")
-        print("  enrich-graph ./code-graph.json ./src --iterations 3")
-        print("\nDescription:")
-        print("  Performs iterative enrichment of a code graph with:")
-        print("    - Layer 1: Structural analysis (classification, complexity, dependencies)")
-        print("    - Layer 2: Semantic analysis (patterns, naming conventions)")
-        print("    - Layer 3: Domain extraction (entities, business rules, workflows)")
-        print("\nOutput:")
-        print("  Creates enrichment/ directory with intermediate layers and indexes")
-        print("  Saves final enriched graph as code-graph-enriched.json")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        prog='enrich-graph',
+        description='Performs iterative enrichment of code graphs with structural, semantic, and domain knowledge',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Description:
+  Performs iterative enrichment of a code graph with:
+    - Layer 1: Structural analysis (classification, complexity, dependencies)
+    - Layer 2: Semantic analysis (patterns, naming conventions)
+    - Layer 3: Domain extraction (entities, business rules, workflows)
 
-    graph_path = Path(sys.argv[1]).resolve()
+Output:
+  Creates enrichment/ directory with intermediate layers and indexes
+  Saves final enriched graph as code-graph-enriched.json
 
-    # Determine root code path
-    if len(sys.argv) > 2 and not sys.argv[2].startswith('--'):
-        root_path = Path(sys.argv[2]).resolve()
-        arg_offset = 3
+Examples:
+  enrich-graph ./code-graph.json ./src
+  enrich-graph ./code-graph.json ./src --iterations 3
+  enrich-graph ./code-graph.json --no-convergence
+"""
+    )
+
+    parser.add_argument(
+        'graph_json_path',
+        type=Path,
+        help='Path to code-graph.json file'
+    )
+
+    parser.add_argument(
+        'root_code_path',
+        type=Path,
+        nargs='?',
+        help='Root directory of source code (default: auto-detect from graph path)'
+    )
+
+    parser.add_argument(
+        '--iterations',
+        type=int,
+        default=2,
+        metavar='N',
+        help='Maximum number of enrichment iterations (default: 2)'
+    )
+
+    parser.add_argument(
+        '--no-convergence',
+        action='store_true',
+        help='Disable early stopping on convergence'
+    )
+
+    parser.add_argument(
+        '--version',
+        action='version',
+        version='Code Graph Enricher v0.1.0'
+    )
+
+    args = parser.parse_args()
+
+    # Resolve paths
+    graph_path = args.graph_json_path.resolve()
+
+    if args.root_code_path:
+        root_path = args.root_code_path.resolve()
     else:
         # Default: assume graph is in .ai-gov/ subdirectory
         root_path = graph_path.parent.parent
-        arg_offset = 2
 
-    # Parse options
-    max_iterations = 2
-    convergence_check = True
-
-    for i in range(arg_offset, len(sys.argv)):
-        if sys.argv[i] == '--iterations' and i + 1 < len(sys.argv):
-            max_iterations = int(sys.argv[i + 1])
-        elif sys.argv[i] == '--no-convergence':
-            convergence_check = False
+    max_iterations = args.iterations
+    convergence_check = not args.no_convergence
 
     print(f"Code Graph Enricher v0.1.0")
     print(f"{'='*60}")
