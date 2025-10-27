@@ -6,7 +6,7 @@ Detects patterns, analyzes naming, classifies method roles
 
 import re
 from typing import Dict, List, Any, Set
-from iterative_enricher import EnricherPass
+from .iterative_enricher import EnricherPass
 
 
 class SemanticEnricher(EnricherPass):

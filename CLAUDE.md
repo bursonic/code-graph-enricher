@@ -14,36 +14,41 @@ Code Graph Enricher is a tool for iterative enrichment of code graphs with struc
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install the package in editable mode
-pip install -e .
-
-# Install with development dependencies
-pip install -e ".[dev]"
+# Install the package in editable mode with dev dependencies
+./venv/bin/pip install -e ".[dev]"
 ```
+
+**IMPORTANT: Always use the virtual environment Python/tools, NOT system Python:**
+- Use `./venv/bin/python` NOT `python` or `python3`
+- Use `./venv/bin/pytest` NOT `pytest`
+- Use `./venv/bin/pip` NOT `pip`
 
 ### Running the Tool
 ```bash
-# Basic usage
-enrich-graph <graph_json_path> [root_code_path]
+# Using the CLI command (installed via pip)
+./venv/bin/enrich-graph <graph_json_path> [root_code_path]
 
 # With options
-enrich-graph ./code-graph.json ./src --iterations 3
-enrich-graph ./code-graph.json ./src --no-convergence
+./venv/bin/enrich-graph ./code-graph.json ./src --iterations 3
+./venv/bin/enrich-graph ./code-graph.json ./src --no-convergence
 ```
 
 ### Development Tools
 ```bash
-# Run tests (when tests/ directory is populated)
-pytest tests/
+# Run tests - ALWAYS use venv pytest
+./venv/bin/pytest tests/ -v
+
+# Run tests with coverage
+./venv/bin/pytest tests/ --cov=enricher --cov-report=term-missing
 
 # Code formatting
-black src/enricher/
+./venv/bin/black src/enricher/
 
 # Linting
-flake8 src/enricher/
+./venv/bin/flake8 src/enricher/
 
 # Type checking
-mypy src/enricher/
+./venv/bin/mypy src/enricher/
 ```
 
 ## Architecture
@@ -166,6 +171,53 @@ enricher.add_enricher(Layer4CustomEnricher())
 **Workflow Patterns** (`layer3_domain.py:_detect_workflow_participation()`)
 - Add custom workflows to `workflow_patterns` dictionary
 
+## Testing
+
+The project includes a comprehensive test suite covering all components:
+
+### Test Structure
+- `tests/conftest.py` - Shared fixtures and test configuration
+- `tests/test_iterative_enricher.py` - Core enricher and base class tests (16 tests)
+- `tests/test_layer1_structural.py` - Layer 1 structural enricher tests (19 tests)
+- `tests/test_layer2_semantic.py` - Layer 2 semantic enricher tests (42 tests)
+- `tests/test_layer3_domain.py` - Layer 3 domain enricher tests (22 tests)
+- `tests/test_cli.py` - CLI functionality tests (17 tests)
+
+### Running Tests
+```bash
+# Run all tests
+./venv/bin/pytest tests/ -v
+
+# Run specific test file
+./venv/bin/pytest tests/test_layer1_structural.py -v
+
+# Run specific test
+./venv/bin/pytest tests/test_layer1_structural.py::TestStructuralEnricher::test_classify_by_name_domain -v
+
+# Run with coverage report
+./venv/bin/pytest tests/ --cov=enricher --cov-report=html
+
+# Run tests matching a pattern
+./venv/bin/pytest tests/ -k "test_classify" -v
+```
+
+### Test Fixtures
+The test suite provides several useful fixtures:
+- `sample_graph` - Basic code graph with file, class, and function nodes
+- `entity_graph` - Graph with domain entities for testing domain enrichment
+- `temp_output_dir` - Temporary directory for test output
+- `temp_source_dir` - Temporary directory with sample source files
+- `enriched_graph_layer1` - Graph with Layer 1 enrichment applied
+- `enriched_graph_layer2` - Graph with Layer 1 and Layer 2 enrichment applied
+
+### Writing New Tests
+When adding new functionality:
+1. Add test methods to the appropriate test file
+2. Use descriptive test names (e.g., `test_classify_by_name_infrastructure`)
+3. Include docstrings explaining what the test verifies
+4. Use fixtures to avoid repetitive setup code
+5. Test both success and failure cases
+
 ## Important Implementation Details
 
 - **No external dependencies**: Uses only Python stdlib for maximum portability
@@ -174,6 +226,7 @@ enricher.add_enricher(Layer4CustomEnricher())
 - **File reading**: Layer 1 attempts to read source files from `root_path` for LOC metrics
 - **Default iterations**: CLI defaults to 2 iterations (can be changed with `--iterations`)
 - **Output location**: Enriched files saved in same directory as input graph file
+- **Module imports**: All layer modules use relative imports (`.iterative_enricher`) for proper package structure
 
 ## Input/Output Formats
 

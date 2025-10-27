@@ -6,7 +6,7 @@ Adds classification, complexity metrics, and dependency information
 
 from pathlib import Path
 from typing import Dict, List, Any
-from iterative_enricher import EnricherPass
+from .iterative_enricher import EnricherPass
 
 
 class StructuralEnricher(EnricherPass):

@@ -5,7 +5,7 @@ Extracts domain concepts, business rules, and workflows
 """
 
 from typing import Dict, List, Any, Set
-from iterative_enricher import EnricherPass
+from .iterative_enricher import EnricherPass
 
 
 class DomainEnricher(EnricherPass):
