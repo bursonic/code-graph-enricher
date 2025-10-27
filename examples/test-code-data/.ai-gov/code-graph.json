@@ -1,0 +1,386 @@
+{
+  "nodes": [
+    {
+      "id": "3e1136f9402887cf",
+      "type": "file",
+      "name": "main.py",
+      "path": "main.py",
+      "location": {
+        "line": 0,
+        "column": 0
+      },
+      "metadata": {
+        "language": "python",
+        "imports": [
+          "os",
+          "sys",
+          "utils",
+          "models"
+        ]
+      }
+    },
+    {
+      "id": "a68f6646c9e89912",
+      "type": "function",
+      "name": "main",
+      "path": "main.py",
+      "location": {
+        "line": 11,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "b23a7b6ff82cc9bb",
+      "type": "function",
+      "name": "initialize_app",
+      "path": "main.py",
+      "location": {
+        "line": 23,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "9699d026dc5a2389",
+      "type": "file",
+      "name": "models.py",
+      "path": "models.py",
+      "location": {
+        "line": 0,
+        "column": 0
+      },
+      "metadata": {
+        "language": "python",
+        "imports": [
+          "dataclasses",
+          "typing"
+        ]
+      }
+    },
+    {
+      "id": "184efa8ef4234423",
+      "type": "class",
+      "name": "User",
+      "path": "models.py",
+      "location": {
+        "line": 9,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "1097cba82bf95d8c",
+      "type": "class",
+      "name": "Product",
+      "path": "models.py",
+      "location": {
+        "line": 25,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "4859de2fa7d2b721",
+      "type": "class",
+      "name": "ShoppingCart",
+      "path": "models.py",
+      "location": {
+        "line": 41,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "f2d71b8f9ce7b6c3",
+      "type": "function",
+      "name": "is_adult",
+      "path": "models.py",
+      "location": {
+        "line": 15,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "a23809b8974f7bc6",
+      "type": "function",
+      "name": "get_display_name",
+      "path": "models.py",
+      "location": {
+        "line": 19,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "d38dfc0f88a30973",
+      "type": "function",
+      "name": "calculate_total",
+      "path": "models.py",
+      "location": {
+        "line": 31,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "71d0af8d48ef08c0",
+      "type": "function",
+      "name": "apply_discount",
+      "path": "models.py",
+      "location": {
+        "line": 35,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "2b4dad528b862564",
+      "type": "function",
+      "name": "__init__",
+      "path": "models.py",
+      "location": {
+        "line": 44,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "fb23612b292a0621",
+      "type": "function",
+      "name": "add_item",
+      "path": "models.py",
+      "location": {
+        "line": 47,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "7122aca2dc0f79e5",
+      "type": "function",
+      "name": "remove_item",
+      "path": "models.py",
+      "location": {
+        "line": 51,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "69bfa4110cf89960",
+      "type": "function",
+      "name": "get_total",
+      "path": "models.py",
+      "location": {
+        "line": 55,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "ca16f754df3cb49d",
+      "type": "file",
+      "name": "utils.py",
+      "path": "utils.py",
+      "location": {
+        "line": 0,
+        "column": 0
+      },
+      "metadata": {
+        "language": "python",
+        "imports": [
+          "typing"
+        ]
+      }
+    },
+    {
+      "id": "160ddad2fdf8ce4a",
+      "type": "class",
+      "name": "DataProcessor",
+      "path": "utils.py",
+      "location": {
+        "line": 24,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "e063f01f7240655d",
+      "type": "function",
+      "name": "calculate_sum",
+      "path": "utils.py",
+      "location": {
+        "line": 7,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "c1a11c8d713dff69",
+      "type": "function",
+      "name": "calculate_average",
+      "path": "utils.py",
+      "location": {
+        "line": 12,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "e3e6efc8850bc260",
+      "type": "function",
+      "name": "format_output",
+      "path": "utils.py",
+      "location": {
+        "line": 19,
+        "column": 0
+      },
+      "metadata": {}
+    },
+    {
+      "id": "a4bcf8532ff0bdd9",
+      "type": "function",
+      "name": "__init__",
+      "path": "utils.py",
+      "location": {
+        "line": 27,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "3ab33a3ed8581512",
+      "type": "function",
+      "name": "filter_data",
+      "path": "utils.py",
+      "location": {
+        "line": 30,
+        "column": 4
+      },
+      "metadata": {}
+    },
+    {
+      "id": "a7afd8dc009d166c",
+      "type": "function",
+      "name": "transform_data",
+      "path": "utils.py",
+      "location": {
+        "line": 34,
+        "column": 4
+      },
+      "metadata": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "3e1136f9402887cf",
+      "target": "a68f6646c9e89912",
+      "type": "contains"
+    },
+    {
+      "source": "3e1136f9402887cf",
+      "target": "b23a7b6ff82cc9bb",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "184efa8ef4234423",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "1097cba82bf95d8c",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "4859de2fa7d2b721",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "f2d71b8f9ce7b6c3",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "a23809b8974f7bc6",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "d38dfc0f88a30973",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "71d0af8d48ef08c0",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "2b4dad528b862564",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "fb23612b292a0621",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "7122aca2dc0f79e5",
+      "type": "contains"
+    },
+    {
+      "source": "9699d026dc5a2389",
+      "target": "69bfa4110cf89960",
+      "type": "contains"
+    },
+    {
+      "source": "ca16f754df3cb49d",
+      "target": "160ddad2fdf8ce4a",
+      "type": "contains"
+    },
+    {
+      "source": "ca16f754df3cb49d",
+      "target": "e063f01f7240655d",
+      "type": "contains"
+    },
+    {
+      "source": "ca16f754df3cb49d",
+      "target": "c1a11c8d713dff69",
+      "type": "contains"
+    },
+    {
+      "source": "ca16f754df3cb49d",
+      "target": "e3e6efc8850bc260",
+      "type": "contains"
+    },
+    {
+      "source": "ca16f754df3cb49d",
+      "target": "a4bcf8532ff0bdd9",
+      "type": "contains"
+    },
+    {
+      "source": "ca16f754df3cb49d",
+      "target": "3ab33a3ed8581512",
+      "type": "contains"
+    },
+    {
+      "source": "ca16f754df3cb49d",
+      "target": "a7afd8dc009d166c",
+      "type": "contains"
+    }
+  ],
+  "metadata": {
+    "generated": "2025-10-27T17:21:30.431592",
+    "language": "python",
+    "root_path": "/home/ksasim/Projects/experiments/mem-spec-res-plan-do/test-code-data",
+    "files_processed": 3,
+    "node_count": 23,
+    "edge_count": 20
+  }
+}
